@@ -1,0 +1,19 @@
+---
+- name: Update DNS record via REST API
+  hosts: localhost
+  gather_facts: no
+  vars:
+    domain: "aappll"
+    api_token: "QG4TQhHWqf_H8RA"
+    ip_address: "your_ip_address"
+  tasks:
+    - name: Call the F5 update API
+      uri:
+        url: "https://f5.si/update.php?domain={{ domain }}&password={{ api_token }}&ip={{ ip_address }}"
+        method: GET
+        return_content: yes
+      register: response
+
+    - name: Show API Response
+      debug:
+        var: response.content
