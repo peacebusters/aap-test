@@ -1,0 +1,15 @@
+---
+- name: Retrieve public IP of AWS EC2 instance
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get public IP using AWS metadata service
+      uri:
+        url: "http://169.254.169.254/latest/meta-data/public-ipv4"
+        method: GET
+        return_content: yes
+      register: public_ip_response
+
+    - name: Show Public IP
+      debug:
+        var: public_ip_response.content
