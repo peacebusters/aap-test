@@ -13,24 +13,11 @@
         name: httpd
         enabled: yes
 
-    - name: configure httpd as forward proxy
-      ansible.builtin.lineinfile:
-        dest: /etc/httpd/conf/httpd.conf
-        state: present
-        search_string: 'Listen 8'
-        line: Listen 8080
-    - name: Bolock added for proxy
-      ansible.builtin.blockinfile:
-        path: /etc/httpd/conf/httpd.conf
-        block: |
-          ProxyRequests On
-          ProxyVia On
-          <Proxy *>
-          Order deny,allow
-          Deny from all
-          Allow from internal.example.com
-          </Proxy>
-        state: present
+    - name: Configure forward-proxy
+      ansible.builtin.copy:
+        src: files/proxy.conf
+        dst: /etc/httpd/conf.d/proxy.conf
+
     - name: restart httpd
       ansible.builtin.service:
         name: httpd
