@@ -11,7 +11,7 @@
     - name: Enable httpd
       ansible.builtin.service:
         name: httpd
-        status: enabled
+        enabled: yes
 
     - name: configure httpd as forward proxy
       ansible.builtin.lineinfile:
