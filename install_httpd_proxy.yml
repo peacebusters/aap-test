@@ -1,0 +1,34 @@
+---
+- name: forward-proxy
+  hosts: all
+  tasks:
+    - name: install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Enable httpd
+      ansible.builtin.service:
+        name: httpd
+        status: enabled
+
+    - name: configure httpd as forward proxy
+      ansible.builtin.lineinfile:
+        dest: /etc/apache2/ports.conf
+        line: Listen 8080
+        insertafter: Listen 80
+    - name: Bolock added for proxy
+      ansible.builtin.blockinfile:
+        block: |
+          ProxyRequests On
+          ProxyVia On
+          <Proxy *>
+          Order deny,allow
+          Deny from all
+          Allow from internal.example.com
+          </Proxy>
+        state: present
+    - name: restart httpd
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
