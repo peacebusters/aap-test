@@ -1,6 +1,6 @@
 ---
 - name: forward-proxy
-  hosts: all
+  hosts: localhost
   tasks:
     - name: install httpd
       ansible.builtin.dnf:
