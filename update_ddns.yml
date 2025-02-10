@@ -11,7 +11,7 @@
   tasks:
     - name: Update DNS record via REST API
       uri:
-        url: "https://f5.si/update.php?domain={{ domain }}&password={{ api_token }}&ip={{ ip_address }}"
+        url: "https://f5.si/update.php?domain={{ domain }}&password={{ api_token }}&ip={{ public_ip }}"
         method: GET
         return_content: yes
       register: dns_update_response
