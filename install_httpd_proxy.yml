@@ -16,8 +16,9 @@
     - name: configure httpd as forward proxy
       ansible.builtin.lineinfile:
         dest: /etc/httpd/conf/httpd.conf
+        state: present
+        search_string: 'Listen 8'
         line: Listen 8080
-        insertafter: Listen 80
     - name: Bolock added for proxy
       ansible.builtin.blockinfile:
         path: /etc/httpd/conf/httpd.conf
