@@ -12,3 +12,4 @@
     - name: show the public ip_address
       debug:
         var: public_ip_response.content
+

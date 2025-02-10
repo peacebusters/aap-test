@@ -1,8 +1,19 @@
 ---
+- name: Get AWS metadata api_token
+  ansible.builtin.uri:
+    url: "http://169.254.169.254/latest/api/token"
+    method: PUT
+    headers:
+      X-aws-ec2-metadata-token-ttl-seconds: "21600"
+    return_content: yes
+  register: metadata_token
+    
 - name: Get public IP using AWS metadata service
-  uri:
+  ansible.builtin.uri:
     url: "http://169.254.169.254/latest/meta-data/public-ipv4"
     method: GET
+    headers:
+      X-aws-ec2-metadata-token: "{{ metadata_token.content }}"
     return_content: yes
   register: public_ip_response
 
