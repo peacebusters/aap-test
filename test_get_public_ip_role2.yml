@@ -1,0 +1,14 @@
+---
+- name: Update DNS record via REST API
+  hosts: localhost
+  gather_facts: no
+  vars:
+    domain: "aappll"
+    api_token: "QG4TQhHWqf_H8RA"
+  roles:
+    - get_public_ip
+
+  tasks:
+    - name: show the public ip_address
+      debug:
+        var: public_ip_response.content
