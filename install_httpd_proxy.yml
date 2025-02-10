@@ -14,11 +14,12 @@
 
     - name: configure httpd as forward proxy
       ansible.builtin.lineinfile:
-        dest: /etc/apache2/ports.conf
+        dest: /etc/httpd/conf/httpd.conf
         line: Listen 8080
         insertafter: Listen 80
     - name: Bolock added for proxy
       ansible.builtin.blockinfile:
+        path: /etc/httpd/conf/httpd.conf
         block: |
           ProxyRequests On
           ProxyVia On
