@@ -4,7 +4,7 @@
   gather_facts: no
   vars:
     domain: "aappll"
-    api_token: "QG4TQhHWqf_H8RA"
+    api_token: {{ api_key }}
   roles:
     - get_public_ip
 
