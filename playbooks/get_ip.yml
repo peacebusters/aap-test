@@ -1,0 +1,12 @@
+---
+- name: Retrieve public IP of AWS EC2 instance #
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Get IP address in EC2
+      register: ip_address
+      ansible.builtin.command: curl -s http://169.254.170.64/latest/meta-data/public-ipv4
+
+    - name: Show IP address
+      ansible.builtin.debug:
+        msg: The public IP address of {{ ansible_hostname }} is {{ ip_address.stdout }}.
