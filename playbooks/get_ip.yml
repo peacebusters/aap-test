@@ -4,10 +4,9 @@
   gather_facts: no
   tasks:
    - name: Gather information about all instances
-     register: ec2_info
      amazon.aws.ec2_instance_info:
+     register: ec2_info
 
-
-   - name: Show ece information
+   - name: Show ec2 information
      ansible.builtin.debug:
      msg: ec2_info
