@@ -1,12 +1,13 @@
 ---
-- name: Retrieve public IP of AWS EC2 instance #
+- name: Retrieve EC2 information
   hosts: all
   gather_facts: no
   tasks:
-    - name: Get IP address in EC2
-      amazon.aws.ec2_instance_info:
-      register: ec2_instance_info
+   - name: Gather information about all instances
+     register: ec2_info
+     amazon.aws.ec2_instance_info:
 
-    - name: Show IP address
-      ansible.builtin.debug:
-        msg: ec2_instance_info
+
+   - name: Show ece information
+     ansible.builtin.debug:
+     msg: ec2_info
