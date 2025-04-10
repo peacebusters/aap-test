@@ -1,6 +1,6 @@
 ---
 - name: Retrieve public IP of AWS EC2 instance
-  hosts: localhost
+  hosts: all
   gather_facts: no
   tasks:
     - name: Get public IP using AWS metadata service
