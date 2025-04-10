@@ -1,5 +1,5 @@
 ---
-- name: Retrieve public IP of AWS EC2 instance
+- name: Retrieve public IP of AWS EC2 instance #
   hosts: all
   gather_facts: no
   tasks:
